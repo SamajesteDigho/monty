@@ -106,10 +106,10 @@ return (atoi(buffer));
 /**
  * execute_operation - Executes operation
  * @stack: the stack to study
- * @:
- * @:
- * Description: 
- * Return: 
+ * @operation: The operation to execute
+ * @line_number: The line number of the instruction to execute
+ * Description: Thi function permits to call the different command functions
+ * Return: 1 or EXIT_FAILURE otherwise
  */
 int execute_operation(stack_t **stack, char *operation, int line_number)
 {
@@ -126,9 +126,7 @@ exit(EXIT_FAILURE);
 push(stack, val);
 }
 else if (type == 2)
-{
 pall(*stack);
-}
 else if (type == 3)
 {
 pint(*stack, line_number);
