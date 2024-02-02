@@ -1,6 +1,10 @@
 #include "monty.h"
 /**
- * push -
+ * push - push command
+ * @stack: The stack address
+ * @val: The value to be pushed
+ * Description: This function permits to push a node at the top of the stack.
+ * Return: The added stack
  */
 stack_t *push(stack_t **stack, int val)
 {
