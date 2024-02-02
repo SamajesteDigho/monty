@@ -36,7 +36,7 @@ execute_operation(&stack, operation, l_nb);
 }
 else
 {
-printf("L%d: unknown instruction %s$\n", l_nb, op_code);
+fprintf(stderr, "L%d: unknown instruction %s\n", l_nb, op_code);
 exit(EXIT_FAILURE);
 }
 l_nb++;
