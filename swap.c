@@ -11,7 +11,7 @@ stack_t *tmp;
 int cur;
 if (*stack == NULL || (*stack)->next == NULL)
 {
-printf("L%d: can't swap, stack too short\n", line_number);
+fprintf(stderr, "L%d: can't swap, stack too short\n", line_number);
 exit(EXIT_FAILURE);
 }
 tmp = (*stack)->next;

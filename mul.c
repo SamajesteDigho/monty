@@ -11,7 +11,7 @@ stack_t *tmp;
 
 if ((*stack) == NULL || (*stack)->next == NULL)
 {
-printf("L%d: can't mul, stack too short\n", line_number);
+fprintf(stderr, "L%d: can't mul, stack too short\n", line_number);
 exit(EXIT_FAILURE);
 }
 tmp = (*stack)->next;
