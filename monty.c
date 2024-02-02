@@ -44,5 +44,6 @@ memset(line, 0, sizeof(line));
 memset(operation, 0, sizeof(operation));
 memset(op_code, 0, sizeof(op_code));
 }
+free_stack(&stack);
 return (0);
 }
