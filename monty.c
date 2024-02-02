@@ -13,8 +13,8 @@ int l_nb = 1;
 char line[BUFFER_SIZE];
 char operation[BUFFER_SIZE];
 char op_code[OP_SIZE];
-stack_t *stack = (stack_t *) malloc(sizeof(stack_t));
-stack = NULL;
+/* stack_t *stack = (stack_t *) malloc(sizeof(stack_t)); */
+stack_t *stack = NULL;
 if (argc != 2)
 {
 fprintf(stderr, "USAGE: monty file\n");
