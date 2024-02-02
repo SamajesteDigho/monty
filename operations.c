@@ -53,33 +53,25 @@ return (0);
 int valid_operation(char *operation)
 {
 if (strncmp("push", operation, OP_SIZE) == 0)
-{
 return (1);
-}
 else if (strncmp("pall", operation, OP_SIZE) == 0)
-{
 return (2);
-}
 else if (strncmp("pint", operation, OP_SIZE) == 0)
-{
 return (3);
-}
 else if (strncmp("pop", operation, 3) == 0)
-{
 return (4);
-}
 else if (strncmp("swap", operation, OP_SIZE) == 0)
-{
 return (5);
-}
 else if (strncmp("add", operation, 3) == 0)
-{
 return (6);
-}
-else if (strncmp("nop", operation, 3) == 0)
-{
+else if (strncmp("sub", operation, 3) == 0)
 return (7);
-}
+else if (strncmp("div", operation, 3) == 0)
+return (8);
+else if (strncmp("mul", operation, 3) == 0)
+return (9);
+else if (strncmp("nop", operation, 3) == 0)
+return (50);
 return (-1);
 }
 
@@ -128,25 +120,21 @@ push(stack, val);
 else if (type == 2)
 pall(*stack);
 else if (type == 3)
-{
 pint(*stack, line_number);
-}
 else if (type == 4)
-{
 pop(stack, line_number);
-}
 else if (type == 5)
-{
 swap(stack, line_number);
-}
 else if (type == 6)
-{
 add(stack, line_number);
-}
 else if (type == 7)
-{
+sub(stack, line_number);
+else if (type == 8)
+div(stack, line_number);
+else if (type == 9)
+mul(stack, line_number);
+else if (type == 50)
 printf("Does nothing\n");
-}
 else
 {
 printf("Unknown commnd found\n");
