@@ -1,47 +1,24 @@
 #include "monty.h"
 /**
- * trim_line - Remove spaces
- * @buffer: In which the trimed line is stored
- * @line: The line to be trimed
- * Description: Permits to removing trailing spaces in a line (string)
- * Return: 1 for success -1 otherwise
+ * get_operation_string - Validate operation
+ * @buffer: The buffer to put the string in.
+ * @operation: The operation to validate
+ * Description: Gets operation string
+ * Return: the size of the string
  */
-int trim_line(char *buffer, char *line)
+int get_operation_string(char *buffer, char *operation)
 {
-char c;
-int cur = 0, i = 0, start = 0, nbelt = 0;
-if (line == NULL)
+size_t i;
+for (i = 0; i < strlen(operation); i++)
 {
-return (-1);
-}
-c = line[cur];
-while (c != '\0' && c != '\n')
-{
-if (c != ' ')
-{
-if (start == 2)
-{
-buffer[i] = ' ';
-i++;
-}
-buffer[i] = c;
-start = 1;
-i++;
-}
-else if (start == 1 && c == ' ')
-{
-if (nbelt == 1)
+if (operation[i] == ' ')
 {
 break;
 }
-start = 2;
-nbelt = 1;
-}
-cur++;
-c = line[cur];
+buffer[i] = operation[i];
 }
 buffer[i] = '\0';
-return (0);
+return (i);
 }
 
 /**
@@ -52,26 +29,34 @@ return (0);
  */
 int valid_operation(char *operation)
 {
-if (strncmp("push", operation, OP_SIZE) == 0)
+if (strlen(operation) == 0)
+return (0);
+if (strncmp("#", operation, 1) == 0)
+return (0);
+else if (strcmp("nop", operation) == 0)
+return (0);
+else if (strcmp("push", operation) == 0)
 return (1);
-else if (strncmp("pall", operation, OP_SIZE) == 0)
+else if (strcmp("pall", operation) == 0)
 return (2);
-else if (strncmp("pint", operation, OP_SIZE) == 0)
+else if (strcmp("pint", operation) == 0)
 return (3);
-else if (strncmp("pop", operation, 3) == 0)
+else if (strcmp("pop", operation) == 0)
 return (4);
-else if (strncmp("swap", operation, OP_SIZE) == 0)
+else if (strcmp("swap", operation) == 0)
 return (5);
-else if (strncmp("add", operation, 3) == 0)
+else if (strcmp("add", operation) == 0)
 return (6);
-else if (strncmp("sub", operation, 3) == 0)
+else if (strcmp("sub", operation) == 0)
 return (7);
-else if (strncmp("div", operation, 3) == 0)
+else if (strcmp("div", operation) == 0)
 return (8);
-else if (strncmp("mul", operation, 3) == 0)
+else if (strcmp("mul", operation) == 0)
 return (9);
-else if (strncmp("nop", operation, 3) == 0)
-return (50);
+else if (strcmp("mod", operation) == 0)
+return (10);
+else if (strcmp("pchar", operation) == 0)
+return (11);
 return (-1);
 }
 
@@ -79,10 +64,11 @@ return (-1);
  * get_value - Collect a value
  * @command: The command line
  * @cmd_len: The length of the search commande
+ * @line_number: Line number
  * Description: Permits to extract the value from a given command
  * Return: The value of the command
  */
-int get_value(char *command, int cmd_len)
+int get_value(char *command, int cmd_len, int line_number)
 {
 size_t i, j = 0;
 char buffer[10];
@@ -92,6 +78,11 @@ buffer[j] = command[i];
 j++;
 }
 buffer[j] = '\0';
+if (strlen(buffer) == 0 || is_numeric(buffer) == -1)
+{
+fprintf(stderr, "L%d: usage: push integer\n", line_number);
+exit(EXIT_FAILURE);
+}
 return (atoi(buffer));
 }
 
@@ -106,15 +97,12 @@ return (atoi(buffer));
 int execute_operation(stack_t **stack, char *operation, int line_number)
 {
 int type, val;
-type = valid_operation(operation);
+char buffer[10];
+get_operation_string(buffer, operation);
+type = valid_operation(buffer);
 if (type == 1)
 {
-val = get_value(operation, 4);
-if (val == -1)
-{
-fprintf(stderr, "L%d: usage: push integer\n", line_number);
-exit(EXIT_FAILURE);
-}
+val = get_value(operation, 4, line_number);
 push(stack, val);
 }
 else if (type == 2)
@@ -130,14 +118,18 @@ add(stack, line_number);
 else if (type == 7)
 sub(stack, line_number);
 else if (type == 8)
-div(stack, line_number);
+_div(stack, line_number);
 else if (type == 9)
 mul(stack, line_number);
-else if (type == 50)
-printf("Does nothing\n");
+else if (type == 10)
+mod(stack, line_number);
+else if (type == 11)
+pchar(*stack, line_number);
+else if (type == 0)
+return (1);
 else
 {
-printf("Unknown commnd found\n");
+fprintf(stderr, "Unknown commnd found\n");
 exit(EXIT_FAILURE);
 }
 return (1);

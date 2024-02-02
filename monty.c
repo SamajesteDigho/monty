@@ -29,15 +29,14 @@ exit(EXIT_FAILURE);
 while (fgets(line, sizeof(line), file))
 {
 trim_line(operation, line);
-strncpy(op_code, operation, OP_SIZE);
-op_code[OP_SIZE] = '\0';
-if (valid_operation(op_code) > 0)
+get_operation_string(op_code, operation);
+if (valid_operation(op_code) >= 0)
 {
 execute_operation(&stack, operation, l_nb);
 }
 else
 {
-printf("L%d: unknown instruction %s\n", l_nb, op_code);
+printf("L%d: unknown instruction %s$\n", l_nb, op_code);
 exit(EXIT_FAILURE);
 }
 l_nb++;

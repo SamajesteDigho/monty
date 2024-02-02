@@ -43,7 +43,9 @@ extern stack_t *stack;
 extern instruction_t instructions[NB_OF_OP];
 
 int trim_line(char *buffer, char *line);
+int is_numeric(char *buffer);
 int valid_operation(char *operation);
+int get_operation_string(char *buffer, char *operation);
 stack_t *push(stack_t **stack, int val);
 void pall(stack_t *stack);
 void pint(stack_t *stack, int line_number);
@@ -51,8 +53,10 @@ void pop(stack_t **stack, int line_number);
 void swap(stack_t **stack, int line_number);
 void add(stack_t **stack, int line_number);
 void sub(stack_t **stack, int line_number);
-void div(stack_t **stack, int line_number);
+void _div(stack_t **stack, int line_number);
 void mul(stack_t **stack, int line_number);
+void mod(stack_t **stack, int line_number);
+void pchar(stack_t *stack, int line_number);
 int execute_operation(stack_t **stack, char *operation, int line_number);
 
 #endif /* STACK_QUEUES */
