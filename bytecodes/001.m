@@ -1,2 +1,2 @@
-push 1
-pinte
+push 98
+pint Holberton
