@@ -59,6 +59,8 @@ else if (strcmp("pchar", operation) == 0)
 return (11);
 else if (strcmp("pstr", operation) == 0)
 return (12);
+else if (strcmp("rotl", operation) == 0)
+return (13);
 return (-1);
 }
 
@@ -129,6 +131,8 @@ else if (type == 11)
 pchar(*stack, line_number);
 else if (type == 12)
 pstr(*stack);
+else if (type == 13)
+rotl(stack);
 else if (type == 0)
 return (1);
 else
