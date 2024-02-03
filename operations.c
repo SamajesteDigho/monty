@@ -57,6 +57,8 @@ else if (strcmp("mod", operation) == 0)
 return (10);
 else if (strcmp("pchar", operation) == 0)
 return (11);
+else if (strcmp("pstr", operation) == 0)
+return (12);
 return (-1);
 }
 
@@ -125,6 +127,8 @@ else if (type == 10)
 mod(stack, line_number);
 else if (type == 11)
 pchar(*stack, line_number);
+else if (type == 12)
+pstr(*stack);
 else if (type == 0)
 return (1);
 else
