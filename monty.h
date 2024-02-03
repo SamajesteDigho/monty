@@ -59,6 +59,8 @@ void mod(stack_t **stack, int line_number);
 void pchar(stack_t *stack, int line_number);
 void pstr(stack_t *stack);
 int rotl(stack_t **stack);
+int rotr(stack_t **stack);
+void stack_queue(stack_t **stack, int type);
 int execute_operation(stack_t **stack, char *operation, int line_number);
 void free_stack(stack_t **stack);
 

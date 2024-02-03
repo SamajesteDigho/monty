@@ -61,6 +61,12 @@ else if (strcmp("pstr", operation) == 0)
 return (12);
 else if (strcmp("rotl", operation) == 0)
 return (13);
+else if (strcmp("rotr", operation) == 0)
+return (14);
+else if (strcmp("stack", operation) == 0)
+return (15);
+else if (strcmp("queue", operation) == 0)
+return (16);
 return (-1);
 }
 
@@ -133,6 +139,12 @@ else if (type == 12)
 pstr(*stack);
 else if (type == 13)
 rotl(stack);
+else if (type == 14)
+rotr(stack);
+else if (type == 15)
+stack_queue(stack, 1);
+else if (type == 16)
+stack_queue(stack, 2);
 else if (type == 0)
 return (1);
 else
